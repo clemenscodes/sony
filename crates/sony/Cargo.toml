@@ -1,0 +1,33 @@
+[package]
+name = "sony"
+version.workspace = true
+edition.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+name = "sony"
+path = "src/lib.rs"
+doctest = false
+
+[[bin]]
+name = "sony"
+path = "src/main.rs"
+
+[dependencies]
+aes.workspace = true
+bytes.workspace = true
+cbc.workspace = true
+clap.workspace = true
+cmac.workspace = true
+ctr.workspace = true
+ddd.workspace = true
+flate2.workspace = true
+md-5.workspace = true
+serde.workspace = true
+sha1.workspace = true
+
+[dev-dependencies]
+serde_test.workspace = true

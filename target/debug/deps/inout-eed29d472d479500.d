@@ -1,0 +1,11 @@
+/home/clemens/.local/src/sony/target/debug/deps/inout-eed29d472d479500.d: /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/lib.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/errors.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout_buf.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/reserved.rs
+
+/home/clemens/.local/src/sony/target/debug/deps/libinout-eed29d472d479500.rlib: /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/lib.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/errors.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout_buf.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/reserved.rs
+
+/home/clemens/.local/src/sony/target/debug/deps/libinout-eed29d472d479500.rmeta: /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/lib.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/errors.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout_buf.rs /home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/reserved.rs
+
+/home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/lib.rs:
+/home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/errors.rs:
+/home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout.rs:
+/home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/inout_buf.rs:
+/home/clemens/.local/share/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/inout-0.2.2/src/reserved.rs:
