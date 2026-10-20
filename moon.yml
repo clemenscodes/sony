@@ -1,0 +1,270 @@
+$schema: './.moon/cache/schemas/project.json'
+
+id: 'workspace'
+language: 'nix'
+stack: 'systems'
+layer: 'automation'
+tags:
+  - 'repo'
+
+tasks:
+  moon/project/graph:
+    toolchain: 'system'
+    command: 'moon project-graph'
+    options:
+      cache: false
+      persistent: true
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  moon/task/graph:
+    toolchain: 'system'
+    command: 'moon task-graph'
+    options:
+      cache: false
+      persistent: true
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  moon/action/graph:
+    toolchain: 'system'
+    command: 'moon action-graph'
+    options:
+      cache: false
+      persistent: true
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/flake/check:
+    toolchain: 'system'
+    command: 'nix flake check --print-build-logs'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/rust-toolchain.toml'
+      - '/Cargo.toml'
+      - '/Cargo.lock'
+      - '/.config/nextest.toml'
+      - '/nix/**/*'
+      - '/crates/**/*'
+      - '/docs/**/*'
+      - '/README.md'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/fmt:
+    toolchain: 'system'
+    command: 'nix fmt'
+    inputs:
+      - '/flake.nix'
+      - '/nix/**/*'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+      cache: false
+
+  nix/build/statix:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.statix'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/statix/**/*'
+      - '/nix/**/*.nix'
+      - '/crates/**/*.nix'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/deadnix:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.deadnix'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/deadnix/**/*'
+      - '/nix/**/*.nix'
+      - '/crates/**/*.nix'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/format:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.format'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/format/**/*'
+      - '/nix/**/*.nix'
+      - '/crates/**/*.nix'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/rustfmt:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.rustfmt'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/rust-toolchain.toml'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/rustfmt/**/*'
+      - '/nix/flake/packages/rustToolchain/**/*'
+      - '/Cargo.toml'
+      - '/crates/**/Cargo.toml'
+      - '/crates/**/*.rs'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/comment:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.comment'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/comment/**/*'
+      - '/crates/**/*.rs'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/word:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.word'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/word/**/*'
+      - '/crates/**/*'
+      - '/docs/**/*'
+      - '/nix/**/*'
+      - '/README.md'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/interface:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.interface'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/interface/**/*'
+      - '/crates/**/*.rs'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/book:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.book'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/book/**/*'
+      - '/docs/**/*.md'
+      - '/crates/**/book.toml'
+      - '/crates/**/*.md'
+      - '/README.md'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/outputs:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.outputs'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/outputs/**/*'
+      - '/docs/OUTPUTS.md'
+      - '/nix/**/*.nix'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/test:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.test'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/test/**/*'
+      - '/crates/**/*.rs'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/signature:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.signature'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/signature/**/*'
+      - '/crates/**/*.rs'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  nix/build/pipeline:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.pipeline'
+    inputs:
+      - '/flake.nix'
+      - '/flake.lock'
+      - '/nix/flake/default.nix'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/pipeline/**/*'
+      - '/moon.yml'
+      - '/.moon/tasks/*.yml'
+      - '/crates/**/moon.yml'
+    options:
+      outputStyle: 'stream'
+      runFromWorkspaceRoot: true
+
+  ci:
+    deps:
+      - 'nix/build/statix'
+      - 'nix/build/deadnix'
+      - 'nix/build/format'
+      - 'nix/build/rustfmt'
+      - 'nix/build/comment'
+      - 'nix/build/word'
+      - 'nix/build/interface'
+      - 'nix/build/book'
+      - 'nix/build/outputs'
+      - 'nix/build/test'
+      - 'nix/build/signature'
+      - 'nix/build/pipeline'
+      - '#crate:nix/build'
+      - '#crate:nix/build/coverage'
+    inputs: []
+    options:
+      outputStyle: 'stream'
+      runInCI: true

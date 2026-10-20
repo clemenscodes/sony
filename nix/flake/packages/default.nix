@@ -1,0 +1,6 @@
+{
+  rustToolchain,
+}:
+{
+  inherit rustToolchain;
+}

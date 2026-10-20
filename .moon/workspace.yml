@@ -1,0 +1,27 @@
+$schema: './cache/schemas/workspace.json'
+
+telemetry: false
+versionConstraint: '>=2.5.3'
+
+pipeline:
+  inheritColorsForPipedTasks: true
+  syncWorkspace: true
+  installDependencies: false
+  syncProjectDependencies: false
+
+hasher:
+  walkStrategy: 'glob'
+  ignorePatterns:
+    - '**/.direnv/**'
+    - '**/.git/**'
+    - '**/.moon/cache/**'
+    - 'build/**'
+    - 'target/**'
+vcs:
+  defaultBranch: 'main'
+  client: 'git'
+  sync: false
+
+projects:
+  - 'moon.yml'
+  - 'crates/*/moon.yml'

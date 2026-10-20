@@ -1,0 +1,9 @@
+[profile.debug]
+fail-fast = true
+failure-output = "immediate"
+status-level = "pass"
+
+[profile.release]
+fail-fast = false
+failure-output = "immediate-final"
+status-level = "fail"

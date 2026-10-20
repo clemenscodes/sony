@@ -1,0 +1,16 @@
+$schema: '../../.moon/cache/schemas/project.json'
+
+id: 'sony'
+language: 'rust'
+stack: 'systems'
+layer: 'library'
+tags:
+  - 'context'
+  - 'crate'
+  - 'shared'
+
+workspace:
+  inheritedTasks:
+    exclude:
+      - 'cargo/run/debug'
+      - 'cargo/run/release'

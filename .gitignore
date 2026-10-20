@@ -1,0 +1,6 @@
+.direnv
+/result
+/result-*
+/.moon/cache
+/build
+/target

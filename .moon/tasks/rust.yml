@@ -1,0 +1,159 @@
+$schema: '../cache/schemas/tasks.json'
+
+inheritedBy:
+  language: 'rust'
+
+fileGroups:
+  sources:
+    - 'src/**/*.rs'
+  manifests:
+    - 'Cargo.toml'
+    - '/Cargo.toml'
+    - '/Cargo.lock'
+    - '/rust-toolchain.toml'
+  derivation:
+    - 'nix/default.nix'
+    - '/flake.nix'
+    - '/flake.lock'
+    - '/nix/flake/default.nix'
+
+taskOptions:
+  outputStyle: 'stream'
+  runFromWorkspaceRoot: true
+
+tasks:
+  cargo/format:
+    toolchain: 'system'
+    command: 'cargo fmt --package $project'
+    inputs:
+      - 'src/**/*.rs'
+    options:
+      cache: false
+
+  cargo/check:
+    toolchain: 'system'
+    command: 'cargo check --package $project'
+    deps:
+      - '^:cargo/check'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+
+  cargo/doc:
+    toolchain: 'system'
+    command: 'cargo doc --package $project --no-deps'
+    deps:
+      - '~:cargo/check'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+    options:
+      cache: false
+
+  cargo/clippy:
+    toolchain: 'system'
+    command: 'cargo clippy --package $project --release --all-targets -- --deny warnings'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+
+  cargo/nextest/debug:
+    toolchain: 'system'
+    command: 'cargo nextest run --package $project --profile debug --no-tests=pass'
+    deps:
+      - '~:cargo/check'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+      - '/.config/nextest.toml'
+
+  cargo/nextest/release:
+    toolchain: 'system'
+    command: 'cargo nextest run --package $project --cargo-profile release --profile release --no-tests=pass'
+    deps:
+      - 'workspace:nix/build/word'
+      - 'workspace:nix/build/comment'
+      - 'workspace:nix/build/signature'
+      - 'workspace:nix/build/interface'
+      - 'workspace:nix/build/test'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+      - '/.config/nextest.toml'
+
+  cargo/build/debug:
+    toolchain: 'system'
+    command: 'cargo build --package $project'
+    deps:
+      - '~:cargo/check'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+
+  cargo/build/release:
+    toolchain: 'system'
+    command: 'cargo build --package $project --release'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+
+  cargo/run/debug:
+    toolchain: 'system'
+    command: 'cargo run --package $project --'
+    deps:
+      - '~:cargo/build/debug'
+    options:
+      cache: false
+
+  cargo/run/release:
+    toolchain: 'system'
+    command: 'cargo run --package $project --release --'
+    deps:
+      - '~:cargo/build/release'
+      - '~:nix/build'
+    options:
+      cache: false
+
+  nix/build:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.$project'
+    deps:
+      - 'workspace:nix/build/word'
+      - 'workspace:nix/build/comment'
+      - 'workspace:nix/build/signature'
+      - 'workspace:nix/build/interface'
+      - 'workspace:nix/build/test'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+      - '@group(derivation)'
+      - '/nix/flake/packages/$project/**/*'
+      - '/nix/flake/checks/$project/**/*'
+      - '/.config/nextest.toml'
+
+  nix/build/coverage:
+    toolchain: 'system'
+    command: 'nix build --no-link --print-build-logs .#checks.x86_64-linux.coverage-$project'
+    deps:
+      - 'workspace:nix/build/word'
+      - 'workspace:nix/build/comment'
+      - 'workspace:nix/build/signature'
+      - 'workspace:nix/build/interface'
+      - 'workspace:nix/build/test'
+    inputs:
+      - '@group(sources)'
+      - '@group(manifests)'
+      - '@group(derivation)'
+      - '/nix/flake/checks/default.nix'
+      - '/nix/flake/checks/coverage/**/*'
+
+  ci:
+    deps:
+      - '~:cargo/clippy'
+      - '~:cargo/nextest/release'
+      - '~:cargo/build/release'
+      - '~:nix/build'
+      - '~:nix/build/coverage'
+    inputs: []
+    options:
+      runInCI: true

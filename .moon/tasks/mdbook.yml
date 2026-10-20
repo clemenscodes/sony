@@ -1,0 +1,23 @@
+$schema: '../cache/schemas/tasks.json'
+
+inheritedBy:
+  file: 'book.toml'
+
+taskOptions:
+  outputStyle: 'stream'
+  runFromWorkspaceRoot: true
+
+tasks:
+  mdbook/build:
+    toolchain: 'system'
+    command: 'mdbook build $projectSource --dest-dir build/book/$project'
+    inputs:
+      - 'book.toml'
+      - 'docs/**/*.md'
+
+  mdbook/serve:
+    toolchain: 'system'
+    command: 'mdbook serve $projectSource --dest-dir build/book/$project'
+    options:
+      cache: false
+      persistent: true

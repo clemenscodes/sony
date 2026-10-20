@@ -1,0 +1,6 @@
+$schema: '../cache/schemas/tasks.json'
+
+env:
+  NIX_CONFIG: |
+    warn-dirty = false
+    eval-cache = false
