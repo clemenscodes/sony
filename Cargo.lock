@@ -84,7 +84,7 @@ dependencies = [
 [[package]]
 name = "bytes"
 version = "0.1.0"
-source = "git+https://github.com/clemenscodes/bytes?tag=v0.0.1#5948e3ab1509eabcf8b292c075b3581029d064dc"
+source = "git+https://github.com/clemenscodes/bytes?tag=v0.0.2#7055a2d1c54df32d96a97d99b1830c6e0877b77d"
 dependencies = [
  "ddd",
  "serde",

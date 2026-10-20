@@ -24,4 +24,4 @@ md-5 = "=0.11.0"
 sha1 = "=0.11.0"
 serde = { version = "=1.0.229", features = ["derive"] }
 serde_test = "=1.0.177"
-bytes = { git = "https://github.com/clemenscodes/bytes", tag = "v0.0.1" }
+bytes = { git = "https://github.com/clemenscodes/bytes", tag = "v0.0.2" }
